@@ -1,0 +1,87 @@
+//query top 10 lugares mas inseguros  
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?location ?inseguridad   
+FROM <http://dbpedia.org/> 
+WHERE {  
+?location rdfs:label"ciudad-escogida". 
+?location esAfectadaPor ?inseguridad .
+} 
+ORDER BY ASC 
+(?inseguridad)
+OFFSET 3
+LIMIT 10
+
+//query top 10 lugares con mejores condiciones ambientales
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?location ?condicionambiental   
+FROM <http://dbpedia.org/> 
+WHERE {  
+?location rdfs:label"ciudad-escogida". 
+?location esAfectadaPor ?condicionambiental .
+} 
+ORDER BY ASC 
+(?condicionambiental)
+OFFSET 3
+LIMIT 10
+
+// Busqueda de capitales
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?departamento ?capital
+WHERE {  
+?departamento rdfs:label"ciudad-escogida".
+?departamento esCapitalDe ?capital
+}
+
+
+
+// Busqueda Lugares de entretenimiento
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?location ?bar ?cine ?museo ?hotel ?cc 
+WHERE {  
+?location rdfs:label"ciudad-escogida".
+?bar estaUbicadoen ?location
+?cine estaUbicadoen ?location
+?museo estaUbicadoen ?location
+?hotel estaUbicadoen ?location
+?cc estaUbicadoen ?location
+}
+
+
+// Busqueda Lugares de entretenimiento para el dia
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?location  ?cine ?museo ?parque
+WHERE {  
+?location rdfs:label"ciudad-escogida".
+?cine estaUbicadoen ?location
+?museo estaUbicadoen ?location
+?parque estaUbicadoen ?location
+}
+
+// Busqueda Lugares de entretenimiento para la noche
+
+PREFIX rdf: <http://www.semanticweb.org/jose/ontologies/2018/3/untitled-ontology-23/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?location  ?cine ?museo ?parque
+WHERE {  
+?location rdfs:label"ciudad-escogida".
+?bar estaUbicadoen ?location
+?parque estaUbicadoen ?location
+?cc estaUbicadoen ?location
+}
+
